@@ -20,7 +20,7 @@ export default function Header() {
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/">
-            <h1 className="text-3xl font-bold text-purple-600">MB</h1>
+            <h1 className="text-3xl font-bold text-primary">MB</h1>
           </Link>
           <div className="md:hidden">
             <button
@@ -38,7 +38,7 @@ export default function Header() {
         >
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             {menus.map((item, idx) => (
-              <li key={idx} className="text-gray-600 hover:text-indigo-600">
+              <li key={idx} className="text-gray-600 hover:text-primary">
                 <Link href={item.path}>{item.title}</Link>
               </li>
             ))}
