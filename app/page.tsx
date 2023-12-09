@@ -1,5 +1,6 @@
 import About from "@/sections/About";
 import Contact from "@/sections/Contact";
+import Footer from "@/sections/Footer";
 import Hero from "@/sections/Hero";
 import Projects from "@/sections/Projects";
 import Services from "@/sections/Services";
@@ -28,6 +29,10 @@ export default function Home() {
 
       <section id="contact" className="min-h-screen py-24">
         <Contact />
+      </section>
+
+      <section className="w-full">
+        <Footer />
       </section>
     </main>
   );

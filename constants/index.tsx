@@ -13,7 +13,7 @@ export const socials = [
   },
   {
     name: "Github",
-    link: "",
+    link: "https://github.com/muhammadbilal10",
     icon: <Github />,
   },
   {
@@ -27,6 +27,12 @@ export const menus = [
   { title: "Home", path: "#home" },
   { title: "About", path: "#about" },
   { title: "Skills", path: "/your-path" },
+  { title: "Services", path: "#services" },
+  { title: "Portfolio", path: "#portfolio" },
+  { title: "Contact me", path: "#contact" },
+];
+
+export const FooterServices = [
   { title: "Services", path: "#services" },
   { title: "Portfolio", path: "#portfolio" },
   { title: "Contact me", path: "#contact" },
