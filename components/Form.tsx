@@ -1,6 +1,7 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -19,28 +20,36 @@ import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   fullName: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Full Name must be at least 2 characters.",
   }),
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  message: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  emailSubject: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  email: z.string().email("This is not a valid email."),
+
+  emailSubject: z.string().min(10, {
+    message: "email subject must be at least 10 characters.",
   }),
   mobile: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  message: z.string().min(10, {
+    message: "message must be at least 10 characters.",
+  }),
 });
 
-function onSubmit(values: z.infer<typeof formSchema>) {
-  console.log(values);
-}
-
 export function ContactForm() {
+  const now = new Date();
+  const locale = "en-US";
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  } as const;
+  const formatted = now.toLocaleString(locale, options);
   // ...
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,6 +60,21 @@ export function ContactForm() {
       mobile: "",
     },
   });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+    toast({
+      title: "Your email has been sent successfully",
+      description: formatted,
+    });
+
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "There was a problem with your request.",
+      action: <ToastAction altText="Try again">Try again</ToastAction>,
+    });
+  }
 
   return (
     <Form {...form}>
@@ -67,9 +91,9 @@ export function ContactForm() {
               <FormControl>
                 <Input placeholder="Muhammad Bilal" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -84,9 +108,9 @@ export function ContactForm() {
               <FormControl>
                 <Input placeholder="muhammadBilal@example.com" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -101,9 +125,9 @@ export function ContactForm() {
               <FormControl>
                 <Input placeholder="+92XXXXXXXXXX" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -121,9 +145,9 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -136,11 +160,11 @@ export function ContactForm() {
             <FormItem className="md:col-span-2">
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Type your message here." />
+                <Textarea placeholder="Type your message here." {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}

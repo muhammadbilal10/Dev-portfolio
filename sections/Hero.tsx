@@ -30,9 +30,11 @@ const Hero = () => {
             applications using modern technologies. I enjoy learning new skills
             and exploring new challenges.
           </p>
-          <Button className="mt-8">
-            Get in touch
-            <ChevronsRight className="ml-2" />
+          <Button className="mt-8" asChild>
+            <Link href="#contact">
+              Get in touch
+              <ChevronsRight className="ml-2" />
+            </Link>
           </Button>
         </div>
 
